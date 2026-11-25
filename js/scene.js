@@ -99,9 +99,10 @@ var mats=[0xf0b429,0xe8872e,0xc4566b,0xf5c96a].map(function(c){return new THREE.
 var petals=[];var lowEnd=innerWidth<=820;for(var i=0;i<(calm?10:(lowEnd?16:30));i++){var p=new THREE.Mesh(new THREE.CircleGeometry(.08,10),mats[i%4]);p.scale.set(1,1.7,1);
   p.position.set((Math.random()-.5)*16,(Math.random()-.5)*11,(Math.random()-.5)*5-2);p.rotation.set(Math.random()*6,Math.random()*6,0);
   p.userData={v:.15+Math.random()*.25,r:Math.random()*2+.5,ph:Math.random()*6};scene.add(p);petals.push(p);}
+var dc=document.createElement("canvas");dc.width=dc.height=32;var dcx=dc.getContext("2d"),dgr=dcx.createRadialGradient(16,16,0,16,16,16);dgr.addColorStop(0,"rgba(255,255,255,1)");dgr.addColorStop(1,"rgba(255,255,255,0)");dcx.fillStyle=dgr;dcx.fillRect(0,0,32,32);var dotTex=new THREE.CanvasTexture(dc);
 var N=lowEnd?70:140,pa=new Float32Array(N*3);for(var j=0;j<N;j++){pa[j*3]=(Math.random()-.5)*18;pa[j*3+1]=(Math.random()-.5)*12;pa[j*3+2]=(Math.random()-.5)*8-1;}
 var pg=new THREE.BufferGeometry();pg.setAttribute("position",new THREE.BufferAttribute(pa,3));
-var dust=new THREE.Points(pg,new THREE.PointsMaterial({color:0xf7de8f,size:.04,transparent:true,opacity:.7,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(dust);
+var dust=new THREE.Points(pg,new THREE.PointsMaterial({color:0xf7de8f,size:.08,map:dotTex,transparent:true,opacity:.7,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(dust);
 
 var W=1,H=1,mob=false,secs=[],HX=1;
 function measure(){W=innerWidth;H=innerHeight;mob=W<=820;R.setPixelRatio(Math.min(devicePixelRatio,mob?1.75:2));R.setSize(W,H,false);cam.aspect=W/H;cam.updateProjectionMatrix();HX=Math.tan(18*Math.PI/180)*9*cam.aspect;

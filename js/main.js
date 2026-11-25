@@ -175,7 +175,7 @@ const tracks = C.bgm.map(src => { const a = new Audio(src); a.preload = "auto"; 
 let stage = 0, pausedByTab = false, gifStarted = false;
 const cur = () => tracks[Math.min(stage, tracks.length - 1)];
 const introImg = document.querySelector("#intro .front img");
-const showHint = on => { const h = $("hint"); if (h) h.hidden = !on; };
+const showHint = () => {};   // the "tap for sound" hint is no longer shown; the first tap still starts the music quietly
 function startGif(){ if (gifStarted) return; gifStarted = true; introImg.src = introImg.dataset.gif; }
 function freezeGif(){ gifStarted = true; introImg.src = introImg.dataset.end; }   // hands-touching frame
 new Image().src = introImg.dataset.gif;   // preload so it starts instantly
@@ -297,7 +297,6 @@ else Promise.all([
   .catch(() => {
     document.body.insertAdjacentHTML("afterbegin",
       '<div style="position:fixed;inset:0;z-index:99;background:#000;color:#ece9e2;display:grid;place-items:center;padding:2rem;text-align:center;font:1rem/1.6 system-ui,sans-serif">' +
-      '<p>Could not load <b>content/details.txt</b>.<br>If you opened index.html by double-clicking it, run a small local server in this folder ' +
-      '(for example <code>python3 -m http.server</code>, then open http://localhost:8000) or upload the whole folder to your web host.</p></div>');
+      '<p>Sorry, this invitation could not be loaded.<br>Please check your connection and open the link again.</p></div>');
   });
 })();

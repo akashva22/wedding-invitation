@@ -8,11 +8,8 @@
 page title: Akash & Divya – Wedding invitation
 
 # ---------- First page (GIF page) ----------
-intro title: You’re Invited For Our Wedding
-intro hint: Tap anywhere for sound
-skip text: Skip
-# If the music has not started after this many seconds (sound blocked), the invitation opens by itself
-# The intro opens by itself after this many seconds (Skip opens it sooner). Keep it short.
+intro title: You’re invited to our wedding
+# The intro opens by itself after this many seconds. Keep it short.
 auto open seconds: 6
 # Typewriter speed on the first page: milliseconds per letter (bigger = slower)
 typing speed: 170
