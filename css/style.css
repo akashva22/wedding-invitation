@@ -186,3 +186,11 @@ a,button,.btn{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 
 /* intro: no Skip button and no "tap for sound" hint */
 .skip,.hint{display:none!important}
+
+/* sound button */
+#sound{position:fixed;z-index:60;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;width:44px;height:44px;padding:0;border-radius:50%;border:1px solid rgba(236,233,226,.35);background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#ecc96a;display:grid;place-items:center;cursor:pointer}
+#sound[hidden]{display:none}
+#sound:focus-visible{outline:3px solid #ecc96a;outline-offset:3px}
+#sound[data-on="0"][data-user="0"]{animation:snd 2.2s ease-in-out infinite}
+@keyframes snd{0%,100%{box-shadow:0 0 0 0 rgba(236,201,106,.5)}50%{box-shadow:0 0 0 9px rgba(236,201,106,0)}}
+@media (prefers-reduced-motion:reduce){#sound{animation:none!important}}

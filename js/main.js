@@ -197,17 +197,40 @@ if (tracks[0]) tracks[0].addEventListener("error", () => setTimeout(openInvitati
 
 // Start bgm1 (and the GIF with it) as soon as the page loads. Browsers often block sound until the
 // first tap, so then the GIF starts after a moment and the first tap (other than Open) starts the music.
-function armFirstGesture(){
-  const go = e => {
-    ["pointerdown","touchend","keydown"].forEach(n => document.removeEventListener(n, go, true));
-    if (stage === 0 && tracks[0] && tracks[0].paused && !tracks[0].ended) playStage(0).then(() => { showHint(false); startGif(); }).catch(() => {});
-  };
-  ["pointerdown","touchend","keydown"].forEach(n => document.addEventListener(n, go, true));
+// ----- Sound -----
+// Browsers only allow music after a tap, so the first tap anywhere starts it, and a small speaker button turns it on/off.
+let userOff = false, ended2 = false;
+const snd = document.createElement("button"); snd.id = "sound"; snd.type = "button"; snd.setAttribute("aria-label", "Music on or off");
+const SV = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+const ICON_ON = SV + '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
+const ICON_OFF = SV + '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
+document.body.appendChild(snd);
+const isOpen = () => !document.body.classList.contains("locked");
+const active = () => isOpen() ? (tracks[1] || tracks[0]) : tracks[0];
+function refreshSnd(){ const a = active(); const on = !!a && !a.paused; snd.dataset.on = on ? "1" : "0"; snd.dataset.user = userOff ? "1" : "0"; snd.innerHTML = on ? ICON_ON : ICON_OFF; snd.hidden = !tracks.length; }
+tracks.forEach(a => ["play", "pause", "ended"].forEach(ev => a.addEventListener(ev, refreshSnd)));
+if (tracks[1]) tracks[1].addEventListener("ended", () => { ended2 = true; });
+const GEST = ["pointerdown", "touchend", "click", "keydown"];
+function detach(){ GEST.forEach(n => document.removeEventListener(n, onGesture, true)); }
+function tryPlay(){
+  if (userOff || !tracks.length) return Promise.resolve();
+  const a = active(); if (!a || !a.paused) return Promise.resolve();
+  if (isOpen() ? ended2 : (stage === 0 && a.ended)) return Promise.resolve();
+  return playStage(isOpen() ? Math.min(1, tracks.length - 1) : 0).then(() => { if (!isOpen()) startGif(); detach(); });
 }
+function onGesture(e){ if (e.target && e.target.closest && e.target.closest("#sound")) return; tryPlay().catch(() => {}); }
+function armFirstGesture(){ GEST.forEach(n => document.addEventListener(n, onGesture, true)); }
+snd.addEventListener("click", () => {
+  const a = active(); if (!a) return;
+  if (!a.paused){ userOff = true; fade(a, 0, 400, () => { a.pause(); refreshSnd(); }); }
+  else { userOff = false; ended2 = false; playStage(isOpen() ? Math.min(1, tracks.length - 1) : 0).then(() => { if (!isOpen()) startGif(); }).catch(() => {}); }
+  refreshSnd();
+});
 if (tracks.length){
   playStage(0).then(() => { showHint(false); startGif(); })
     .catch(() => { showHint(true); armFirstGesture(); setTimeout(startGif, 2500); });   // sound blocked: ask for a tap
 } else { startGif(); }
+armFirstGesture(); refreshSnd();
 
 document.addEventListener("visibilitychange", () => {
   const a = cur(); if (!a) return;
@@ -221,7 +244,7 @@ function switchToBgm2(){
   const first = tracks[0];
   showHint(false);
   if (!first.paused) fade(first, 0, 900, () => first.pause());
-  playStage(1).catch(() => {});
+  if (!userOff) playStage(1).catch(() => {});
 }
 
 // ===== Page turn: the cover is cut into thin strips that bend as the page lifts =====
