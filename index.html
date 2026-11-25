@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Akash &amp; Divya – Wedding invitation</title>
+<meta name="description" content="Join us for the wedding of Akash and Divya on Sunday, 6 December 2026 in Guruvayoor, Kerala.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="You’re invited to the wedding of Akash &amp; Divya">
+<meta property="og:description" content="Sunday, 6 December 2026 · Guruvayoor, Kerala">
+<!-- Link preview (WhatsApp, etc.): replace YOUR-DOMAIN with the address where you host this folder -->
+<meta property="og:image" content="https://YOUR-DOMAIN/assets/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Hanken+Grotesk:wght@300;400;500&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="locked">
+<div id="bg" aria-hidden="true"></div>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="shade"></div>
+<div id="intro">
+  <div class="front">
+  <button class="skip" id="skip" type="button"></button>
+  <img src="assets/intro-start.jpg" data-gif="assets/intro.gif" data-end="assets/intro-end.jpg" alt="Two hands reaching toward each other in the dark">
+  <div class="intro-copy">
+    <p id="introLine"></p>
+    <p class="hint" id="hint" hidden></p>
+  </div>
+  </div>
+  <div class="back"></div>
+</div>
+
+<main id="main" aria-hidden="true">
+  <section class="hero">
+    <p class="family" id="family"></p>
+    <h1><span id="groom"></span><span class="and" id="andWord"></span><span id="bride"></span></h1>
+    <p class="context" id="context"></p>
+    <p class="when" id="when"></p>
+    <p class="knot-wrap"><span class="knot" id="knot"><span class="knot-text" id="knotText"></span></span></p>
+    <p class="where" id="muhurtham"></p>
+    <p class="where" id="where"></p>
+    <p class="cue" id="cue"></p>
+  </section>
+
+  <section id="details">
+    <h2 id="countHeading"></h2>
+    <div id="count" role="timer" aria-live="off"></div>
+  </section>
+
+  <section>
+    <h2 id="dayHeading"></h2>
+    <ol id="schedule"></ol>
+  </section>
+
+  <section class="venue">
+    <h2 id="findHeading"></h2>
+    <div id="places"></div>
+  </section>
+
+  <section class="info" id="infoSection" hidden>
+    <h2 id="infoHeading"></h2>
+    <ul id="infoList"></ul>
+  </section>
+
+  <section class="rsvp" hidden>
+    <h2 id="rsvpHeading"></h2>
+    <p id="rsvpText"></p>
+    <div id="rsvpFields"></div>
+    <div class="row">
+      <a class="btn solid" id="yes" target="_blank" rel="noopener"></a>
+      <a class="btn" id="no" target="_blank" rel="noopener"></a>
+    </div>
+    <div class="note" id="note" role="status"></div>
+  </section>
+
+  <footer><p id="closing"></p><p id="footerText"></p></footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/scene.js"></script>
+</body>
+</html>

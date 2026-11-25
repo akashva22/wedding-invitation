@@ -1,0 +1,106 @@
+# ============================================================
+#  EDIT THIS FILE to change any text on the invitation.
+#  Each line is   label: value   (keep the label, change the value).
+#  Lines starting with # are notes and are ignored.
+# ============================================================
+
+# ---------- Page title (browser tab) ----------
+page title: Akash & Divya – Wedding invitation
+
+# ---------- First page (GIF page) ----------
+intro title: You’re Invited For Our Wedding
+intro hint: Tap anywhere for sound
+skip text: Skip
+# If the music has not started after this many seconds (sound blocked), the invitation opens by itself
+# The intro opens by itself after this many seconds (Skip opens it sooner). Keep it short.
+auto open seconds: 6
+# Typewriter speed on the first page: milliseconds per letter (bigger = slower)
+typing speed: 170
+
+# ---------- Second page: the opening ----------
+# Small cue under the card (the names, date and times now appear only on the 3D card)
+scroll hint: Scroll to open the card
+# Heading on the back of the 3D card
+card heading: You’re invited
+# Optional line above the names, e.g. Together with their families. Leave empty to hide it.
+family line:
+# Reads as: "Akash and Divya are getting married on Sunday, 6 December 2026"
+groom: Akash
+and word: and
+bride: Divya
+context: are getting married on
+date: Sunday, 6 December 2026
+
+# Golden sparkling line
+tying the knot: Tying the knot 6:00 am – 7:00 am at Guruvayoor Temple
+muhurtham: Muhurtham 11:00 am – 12:00 pm
+venue line: Bhasuri Inn, Guruvayoor, Kerala
+
+# ---------- Countdown ----------
+countdown heading: Counting down
+# Date and time the countdown ends, with timezone (IST = +05:30). Currently 7:00 am, when the knot has been tied.
+countdown ends: 2026-12-06T07:00:00+05:30
+label days: days
+label hours: hours
+label minutes: minutes
+label seconds: seconds
+# Shown on both pages once the countdown reaches zero
+just married: Just Married
+# After the countdown ends the page also switches to this wording, hides "The day" and the RSVP form
+context after: got married on
+thank you heading: Thank you
+thank you text: Thank you for your blessings and good wishes.
+
+# ---------- The day ----------
+day heading: The day
+## Schedule
+- 6:00 am | Tying the knot | Guruvayoor Temple. Guests, please arrive by 6:00 am
+- After 7:00 am | Break | Rest and refresh before we meet at Bhasuri Inn
+- 10:30 am | Guests arrive | Welcome and seating at Bhasuri Inn
+- 11:00 am | Muhurtham | Please be seated by 10:50 am
+- 12:30 pm | Wedding lunch | Sadya
+
+# ---------- Good to know (optional) ----------
+# Add lines like  - Dress code | Traditional wear  . With no lines the whole section is hidden.
+info heading: Good to know
+## Info
+# - Dress code | Traditional wear
+# - Parking | Parking is available at Bhasuri Inn
+# - Questions? | Call 0000000000
+
+# ---------- Where to find us ----------
+find heading: Where to find us
+map button: Open in Maps
+## Places
+- Guruvayoor Temple | Guruvayoor, Thrissur, Kerala | https://www.google.com/maps/search/?api=1&query=Guruvayur+Sri+Krishna+Temple
+- Bhasuri Inn | Guruvayoor, Thrissur, Kerala | https://www.google.com/maps/search/?api=1&query=Bhasuri+Inn+Guruvayur
+
+# ---------- RSVP ----------
+# The form fields, Google Sheet link, columns and tab are set in content/rsvp-config.txt
+rsvp heading: Will you join us?
+# Leave "rsvp by" empty to skip the reply-by sentence. {date} is replaced by the "rsvp by" value.
+rsvp by:
+rsvp by sentence: Please let us know by {date}.
+rsvp text: Your reply opens in WhatsApp.
+# Country code + number, no + or spaces
+whatsapp: 910000000000
+guest default: A guest
+accept button: Joyfully accept
+decline button: Regretfully decline
+required note: Please fill in the required details first.
+thank you note: Thank you. Your reply is ready to send in WhatsApp.
+sending note: Saving your reply…
+saved note: Thank you. Your reply has been saved.
+save failed note: Sorry, your reply could not be saved. Please try again.
+already note: Your reply has already been saved.
+# {name}, {guests}, {message}... are replaced by what the guest typed (the labels come from rsvp-config.txt)
+whatsapp accept: {name} will be joining Akash & Divya on Sunday, 6 December 2026.
+whatsapp decline: {name} is sorry to miss Akash & Divya’s wedding.
+
+# ---------- Footer ----------
+closing line: Looking forward to seeing you there
+footer: With love, Akash & Divya
+
+# ---------- Music files (inside the bgm folder) ----------
+bgm1: bgm/bgm1.mp3
+bgm2: bgm/bgm2.mp3

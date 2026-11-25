@@ -1,0 +1,50 @@
+# ============================================================
+#  RSVP CONNECTOR: saves replies to a Google Sheet.
+#  Edit this file only. Same rules as details.txt:  label: value
+#  One-time setup for the Google side: see rsvp/SETUP.md
+# ============================================================
+
+# rsvp mode:
+#   whatsapp = reply opens in WhatsApp only (no Google Sheet needed)
+#   sheet    = reply is saved to the Google Sheet only
+#   both     = saved to the sheet AND WhatsApp opens
+# If "web app url" below is empty, the page uses whatsapp automatically.
+rsvp mode: both
+
+# ---------- Google Sheet ----------
+# Paste the sheet link from your browser address bar. The sheet ID (and #gid= tab number) are read from it.
+sheet link: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit#gid=0
+
+# Which tab to write into. The first one that is filled in is used:
+#   1) sheet tab name   (the name shown on the tab, e.g. RSVP)
+#   2) sheet number     (1 = first tab, 2 = second tab ...)
+#   3) the #gid= number inside the sheet link
+sheet tab name: RSVP
+sheet number:
+
+# The Web app URL you get after deploying rsvp/google-apps-script.gs (ends with /exec)
+web app url:
+
+# yes = write the column headers in row 1 if the tab is empty
+write header: yes
+
+# Value saved in the {attending} column for each button
+accept value: Accepted
+decline value: Declined
+
+## Fields
+# What the guest fills in.   key | label | type | required or optional | placeholder
+# types: text, number, tel, email, textarea.   The key is used in the Columns below as {key}.
+# The accept / decline buttons supply {attending} automatically.
+- name | Your name | text | required | Type your name
+- guests | Number of guests | number | optional | 1
+- message | Message for the couple | textarea | optional | Write a short note
+
+## Columns
+# Order of the columns in the sheet, first line = column A.   Header in the sheet | value
+# Use {name} {guests} {message} {attending} (any field key) and {timestamp} (added automatically).
+- Timestamp | {timestamp}
+- Name | {name}
+- Attending | {attending}
+- Guests | {guests}
+- Message | {message}
